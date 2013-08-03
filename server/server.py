@@ -47,6 +47,14 @@ if __name__ == "__main__":
     except:
         print "not connected :("
 
+#
+# TODO
+#
+#   queue serial sendings,
+#   if '2' happens put it in the first queue slot...
+#
+
+
     while True:
         print ">>> ",
         ch = (getch()).lower()
@@ -63,20 +71,28 @@ if __name__ == "__main__":
             print "turning off"
             ser.write('0')
 
+        elif ch == '2':
+            print "stopping"
+            ser.write('2')
+
         elif ch == 'w':
             print "FWD"
+            #ser.write('1')
             ser.write('w')
 
         elif ch == 's':
             print "RWD"
+            #ser.write('2')
             ser.write('s')
 
         elif ch == 'a':
             print "LFT"
+            #ser.write('4')
             ser.write('a')
 
         elif ch == 'd':
             print "RGT"
+            #ser.write('8')
             ser.write('d')
 
         else:
