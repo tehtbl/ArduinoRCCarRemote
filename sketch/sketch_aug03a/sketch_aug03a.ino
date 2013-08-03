@@ -54,6 +54,32 @@ void loop()
       digitalWrite(LFT, LOW);
       digitalWrite(RGT, LOW);
       break;
+
+    case '4':
+      FWD_state = true;
+      RWD_state = false;
+      LFT_state = true;
+      RGT_state = false;
+      break;
+    case '5':
+      FWD_state = true;
+      RWD_state = false;
+      LFT_state = false;
+      RGT_state = true;
+      break;
+
+    case '8':
+      FWD_state = false;
+      RWD_state = true;
+      LFT_state = true;
+      RGT_state = false;
+      break;
+    case '9':
+      FWD_state = false;
+      RWD_state = true;
+      LFT_state = false;
+      RGT_state = true;
+      break;
       
     case 'w':
       FWD_state = true;

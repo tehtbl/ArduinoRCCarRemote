@@ -77,23 +77,35 @@ if __name__ == "__main__":
 
         elif ch == 'w':
             print "FWD"
-            #ser.write('1')
             ser.write('w')
 
         elif ch == 's':
             print "RWD"
-            #ser.write('2')
             ser.write('s')
 
         elif ch == 'a':
             print "LFT"
-            #ser.write('4')
             ser.write('a')
 
         elif ch == 'd':
             print "RGT"
-            #ser.write('8')
             ser.write('d')
+
+        elif ch == '4':
+            print "FWD LFT"
+            ser.write('4')
+
+        elif ch == '5':
+            print "FWD RGT"
+            ser.write('5')
+
+        elif ch == '8':
+            print "RWD LFT"
+            ser.write('8')
+
+        elif ch == '9':
+            print "RWD RGT"
+            ser.write('9')
 
         else:
             print "got '%s' -> no idea what to do" % (ch)
