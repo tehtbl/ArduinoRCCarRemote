@@ -26,7 +26,6 @@ void setup()
 
 void loop()
 {
-  
   int in;
   
   if (Serial.available() > 0) 
@@ -43,6 +42,7 @@ void loop()
     case '1':
       digitalWrite(PWR, HIGH);
       break;
+      
     case '2':
       FWD_state = false;
       RWD_state = false;

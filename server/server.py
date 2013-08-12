@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+#
+# TODO
+#
+#   queue serial sendings,
+#   if '2' happens put it in the first queue slot...
+#
+
 import os
 import sys
 import termios
@@ -13,6 +20,7 @@ parser.add_option("-d", "--device", dest="device", type="string", help="tty to i
 
 (opts, args) = parser.parse_args()
 
+# get char from stdin
 def getch():
   fd = sys.stdin.fileno()
 
@@ -35,6 +43,58 @@ def getch():
     fcntl.fcntl(fd, fcntl.F_SETFL, oldflags)
   return c
 
+# send the commands to serial dev
+def doSend(ch, ser):
+    if ch == '1':
+        print "turning on"
+        ser.write('1')
+
+    elif ch == '0':
+        print "turning off"
+        ser.write('0')
+
+    elif ch == '2':
+        print "stopping"
+        ser.write('2')
+
+    elif ch == 'w':
+        print "FWD"
+        ser.write('w')
+
+    elif ch == 's':
+        print "RWD"
+        ser.write('s')
+
+    elif ch == 'a':
+        print "LFT"
+        ser.write('a')
+
+    elif ch == 'd':
+        print "RGT"
+        ser.write('d')
+
+    elif ch == '4':
+        print "FWD LFT"
+        ser.write('4')
+
+    elif ch == '5':
+        print "FWD RGT"
+        ser.write('5')
+
+    elif ch == '8':
+        print "RWD LFT"
+        ser.write('8')
+
+    elif ch == '9':
+        print "RWD RGT"
+        ser.write('9')
+
+    else:
+        print "got '%s' -> no idea what to do" % (ch)
+
+#
+# MAiN
+#
 if __name__ == "__main__":
 
     if not opts.device:
@@ -47,68 +107,14 @@ if __name__ == "__main__":
     except:
         print "not connected :("
 
-#
-# TODO
-#
-#   queue serial sendings,
-#   if '2' happens put it in the first queue slot...
-#
-
-
     while True:
         print ">>> ",
         ch = (getch()).lower()
         print ch
-
         if ch == 'x':
             break
-
-        elif ch == '1':
-            print "turning on"
-            ser.write('1')
-
-        elif ch == '0':
-            print "turning off"
-            ser.write('0')
-
-        elif ch == '2':
-            print "stopping"
-            ser.write('2')
-
-        elif ch == 'w':
-            print "FWD"
-            ser.write('w')
-
-        elif ch == 's':
-            print "RWD"
-            ser.write('s')
-
-        elif ch == 'a':
-            print "LFT"
-            ser.write('a')
-
-        elif ch == 'd':
-            print "RGT"
-            ser.write('d')
-
-        elif ch == '4':
-            print "FWD LFT"
-            ser.write('4')
-
-        elif ch == '5':
-            print "FWD RGT"
-            ser.write('5')
-
-        elif ch == '8':
-            print "RWD LFT"
-            ser.write('8')
-
-        elif ch == '9':
-            print "RWD RGT"
-            ser.write('9')
-
         else:
-            print "got '%s' -> no idea what to do" % (ch)
+            doSend(ch, ser)
 
     print "bye."
 
