@@ -1,8 +1,10 @@
 $(document).ready(function(){
 
-    function sendEvent(e)
+    // send event to webserver
+    function sendEvent(c)
     {
-        console.log("sent: " + e);
+        $.get('/?send=' + c, null);
+        console.log("sent: " + c);
     };
 
     // implement keypress on body
